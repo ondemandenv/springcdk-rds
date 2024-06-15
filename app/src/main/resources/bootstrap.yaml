@@ -1,0 +1,12 @@
+app:
+  env: dev
+spring:
+  cloud:
+    vault.enabled: false
+  application:
+    name: payments-platform-api
+    kubernetes:
+      enabled: false
+      aws:
+        stack:
+          auto: false

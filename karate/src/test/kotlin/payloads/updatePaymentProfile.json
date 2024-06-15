@@ -1,0 +1,22 @@
+{
+  "updateType": "CREDIT_CARD",
+  "creditCard": {
+    "expirationMonth": 2,
+    "expirationYear": 2029,
+    "billingInformation": {
+      "name": "Test1 Test1",
+      "firstName": "Test",
+      "lastName": "Test",
+      "email": "example@example.com",
+      "phoneNumber": "phone",
+      "address": {
+        "country": "US",
+        "lineOne": "101 N Brand Blvd",
+        "lineTwo": "Apt #1",
+        "city": "Glendale",
+        "postalCode": "91203",
+        "state": "CA"
+      }
+    }
+  }
+}

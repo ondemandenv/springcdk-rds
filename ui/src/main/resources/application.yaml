@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    group:
+      # include these profiles when activating "local"
+      local:
+        - strict-api
+        - api-errors
+  flyway:
+    enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/payments_platform
+    username: payments_platform
+    password: payments_platform
+  jpa:
+    properties:
+      hibernate:
+        # This must match the spring.flyway.schemas config
+        # in db-migration's application.yaml
+        default_schema: payments_platform
+        types:
+          print:
+            banner: "false"

@@ -1,0 +1,30 @@
+{
+  "requestId": "#(requestId)",
+  "currencyCode": "USD",
+  "targetType": "string",
+  "targetKey": "#(targetKey)",
+  "reason": "string",
+  "source": "string",
+  "lineItemDtos": [
+    {
+      "id": "#(lineItemId)",
+      "description": "string",
+      "amount": "10.00"
+    }
+  ],
+  "paymentDtos": [
+    {
+      "paymentMethod": #(paymentMethod),
+      "lineItemIds": [
+        "#(lineItemId)"
+      ],
+      "shouldCapture": #(shouldCapture),
+      "authorizeAmount": "10.00",
+      "paymentMetadata": {
+        "orderSource": "ecommerce",
+        "customPhone": "8007730888",
+        "billingDescriptor": "LZC* ondemandenv.dev"
+      }
+    }
+  ]
+}

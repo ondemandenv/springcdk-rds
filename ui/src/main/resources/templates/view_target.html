@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{default :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Target View</title>
+</head>
+<body>
+<section class="col-md-12">
+  <div class="row">
+    <div class="col-3">Target</div>
+    <div class="col-3" th:text="${target}"></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Entity</div>
+    <div class="col-3" th:text="${customerId}">abc@example.com</div>
+  </div>
+  <div>Transactions</div>
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+      <th>Amount</th>
+      <th>Profile Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="payment : ${springcdk}">
+      <td th:text="${payment.paymentId}"></td>
+      <td th:text="'$' + ${payment.amount.amount}"></td>
+      <td><a th:href="'/profile?profile_id=' + ${payment.paymentProfileId} + '&customer_id=' + ${customerId}"
+             th:text="${payment.paymentProfileId}"></a></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+ALTER TABLE domain_events
+    ADD COLUMN sequence_number BIGINT GENERATED ALWAYS AS IDENTITY;

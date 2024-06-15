@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:replace="~{default :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Profile View</title>
+</head>
+<body>
+<section class="col-md-12">
+  <div class="row">
+    <div class="col-3">Profile</div>
+    <div class="col-3" th:text="${profile.id}"></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Entity</div>
+    <div class="col-3"><a th:href="@{/entity(customer_id=${customerId})}" th:text="${customerId}"></a></div>
+  </div>
+  <div>Information</div>
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+      <th>Type</th>
+      <th>Last4</th>
+      <th>Exp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${profile.id}"></td>
+      <td th:text="${savedCreditCard.type}"></td>
+      <td th:text="${savedCreditCard.lastFourDigits}"></td>
+      <td th:text="${savedCreditCard.expirationMonth + '/' + savedCreditCard.expirationYear}"></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

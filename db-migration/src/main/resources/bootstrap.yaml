@@ -1,0 +1,11 @@
+app:
+  env: dev
+spring:
+  cloud:
+    vault:
+      enabled: false
+    kubernetes:
+      enabled: false
+      aws:
+        stack:
+          auto: false

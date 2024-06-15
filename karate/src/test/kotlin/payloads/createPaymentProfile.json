@@ -1,0 +1,32 @@
+{
+  "requestId": "#(requestId)",
+  "reusable": true,
+  "default": true,
+  "metadata": {
+    "lzDataPaymentProfileId": "1234"
+  },
+  "method": {
+    "type": "CREDIT_CARD",
+    "creditCard": {
+      "creditCardNumber": "#(cardNumber)",
+      "expYear": 2024,
+      "cardVerificationValue": "009",
+      "expMonth": 5,
+      "billingInformation": {
+        "name": "Test Test",
+        "firstName": "Test",
+        "lastName": "Test",
+        "phoneNumber": "5555555555",
+        "email": "#(email)",
+        "address": {
+          "country": "US",
+          "lineOne": "101 N Brand Blvd",
+          "lineTwo": "Apt 1",
+          "postalCode": "91203",
+          "city": "Glendale",
+          "state": "CA"
+        }
+      }
+    }
+  }
+}

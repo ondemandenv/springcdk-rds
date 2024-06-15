@@ -1,0 +1,13 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: db-migration
+  flyway:
+    enabled: true
+    schemas:
+      - ${APP_SCHEMA}
+  datasource:
+    url: jdbc-secretsmanager:postgresql://${RDS_ENDPOINT}
+    username: ${RDS_SECRET}
+    driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerPostgreSQLDriver

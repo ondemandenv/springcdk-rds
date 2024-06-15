@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html th:replace="~{default :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Search</title>
+</head>
+<body>
+<section class="col-md-12">
+    <form method="get" th:action="@{/target}">
+        <div class="form-group">
+            <label for="target_type">Target Type:</label>
+            <input class="form-control" id="target_type" name="target_type" type="text" placeholder="Type">
+        </div>
+        <div class="form-group">
+            <label for="target_key">Target Key:</label>
+            <input class="form-control" id="target_key" name="target_key" type="text" placeholder="Key">
+        </div>
+        <div class="form-group">
+            <label for="customer_id">Customer Id:</label>
+            <input class="form-control" id="customer_id" name="customer_id" type="text" placeholder="Key">
+        </div>
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+</section>
+
+</body>
+</html>

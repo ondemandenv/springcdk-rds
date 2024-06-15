@@ -1,0 +1,4 @@
+CREATE TABLE requests (
+    uuid TEXT PRIMARY KEY,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+)

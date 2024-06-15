@@ -1,0 +1,9 @@
+spring:
+  config.import: vault://payments-platform/db-migration
+  cloud.vault:
+    enabled: true
+    token: 00000000-0000-0000-0000-000000000000
+    scheme: http
+    kv:
+      enabled: true
+

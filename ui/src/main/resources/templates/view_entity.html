@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{default :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Entity View</title>
+</head>
+<body>
+<section class="col-md-12">
+  <div class="row">
+    <div class="col-3">Entity</div>
+    <div class="col-3" th:text="${customerId}"></div>
+  </div>
+  <div>Profiles</div>
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="profile : ${profiles}">
+      <td><a th:href="@{/profile(customer_id=${customerId}, profile_id=${profile.id})}" th:text="${profile.id}"></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

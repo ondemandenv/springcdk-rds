@@ -1,0 +1,25 @@
+{
+  "type": "CREDIT_CARD",
+  "creditCard": {
+    "creditCardNumber": "4111111111111111",
+    "expMonth": "#(expMonth)",
+    "expYear": "#(expYear)",
+    "cardVerificationValue": "123",
+    "billingInformation": {
+      "name": "string",
+      "firstName": "first",
+      "lastName": "last",
+      "email": "example@example.com",
+      "phoneNumber": "phone",
+      "address": {
+        "country": "US",
+        "lineOne": "string",
+        "lineTwo": "string",
+        "postalCode": "string",
+        "city": "city",
+        "state": "string"
+      }
+    }
+  },
+  "savedCreditCard": null
+}

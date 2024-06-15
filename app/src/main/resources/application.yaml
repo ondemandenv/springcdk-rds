@@ -1,0 +1,78 @@
+app:
+  gateway:
+    default: NOOP
+    proxyDefault: WORLDPAY
+  vault:
+    keyName: payments-platform-tk
+    transitPath: payments-platform-transit
+  domain-events:
+    enabled: false
+
+
+spring:
+  profiles:
+    group:
+      # include these profiles when activating "local"
+      local:
+        - strict-api
+        - test-gateways
+        - api-errors
+  flyway:
+    enabled: false
+  datasource:
+    url: jdbc-secretsmanager:postgresql://${RDS_ENDPOINT}
+    username: ${RDS_SECRET}
+    driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerPostgreSQLDriver
+  jpa:
+    properties:
+      hibernate:
+        # This must match the spring.flyway.schemas config
+        # in db-migration's application.yaml
+        default_schema: ${APP_SCHEMA}
+        types:
+          print:
+            banner: "false"
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  forward-headers-strategy: native
+
+springdoc:
+  packagesToScan:
+    - dev.odmd.platform.payments
+
+payment-profile-service:
+  entity-id-explanation: "Unique identifier of the entity that owns the payment profile"
+  customer-id-explanation: "Unique identifier of the customer that owns the payment profile"
+  profile-id-explanation: "Identifier returned by the Create Payment Profile endpoint"
+  payment-method-explanation: "Payment method should have `type` and the field matching that type set, everything else null or not present"
+  payment-gateway-id-explanation: "Identifier of the gateway to use when creating the payment profile. Only intended for testing.w"
+
+payment-service:
+  create-payment-authorization: "Create a payment authorization. Optionally specify payment line items that should be immediately captured"
+  stop-payment: "Stop a payment. No further operations will charge the customer on this payment, refund is still possible"
+  capture-payment: "Capture on an outstanding payment authorization. Line items to capture must be specified"
+  cancel-payment: "Cancel an outstanding payment authorization"
+  payment-refund-options: "Get a list of the ways that line items can be refunded for a specific payment"
+  payment-refund: "Refund a payment by line item. Use of the GET /payments/refund-options before calling this is recommended"
+  get-payment-by-id: "Get information about a payment by id"
+  list-payments: "List payments related to a target"
+  target-type-explanation: "Domain type to which this payment applies (e.g. order)"
+  target-key-explanation: "Id of the domain object to which this payment applies"
+
+installment-service:
+  create-installment-agreement: "Create installment agreement. Payments will be scheduled, all parameters are required."
+  get-installment-agreement: "Get installment agreement. Response contains status from each payment."
+  suspend-installment-agreement: "Suspend installment agreement. No more installments will be processed anymore."
+  resume-installment-agreement: "Resume_installment_agreement. Resume a suspended installment agreement"
+  update-installment-payment-method: "Update_installment_payment_method. Update a payment method of existing installment payment."
+  apply-installment-payment-method: "Apply_installment_payment_method. Process all pending installments of existing installment agreement."
+
+auth0:
+  audience: https://jjj/engineering/kkk
+  client_id: JkpE7cmedNPWWBWMKYlkDMWJVP3ilQz5
+  client_secret: 7V75B5kk1bf-Dkz6wjDfgriPNjwSn1REkZG1ocHjDaLnkmCfr7
+  host: https://dev-ondemand.auth0.com
+  tenants:
+    - audience: https://github.ondemandenv.dev/engineering/payments-platform
+      issuer-uri: https://dev-ondemand.auth0.com/

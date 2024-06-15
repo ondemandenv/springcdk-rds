@@ -1,0 +1,8 @@
+{
+  "type": "SAVED_CREDIT_CARD",
+  "creditCard": null,
+  "savedCreditCard": {
+    "paymentProfileId": "#(paymentProfileId)",
+    "email": "#(email || 'example@example.com')"
+  }
+}

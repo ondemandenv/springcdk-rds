@@ -1,0 +1,7 @@
+spring:
+  config.import: "vault://payments-platform/payments-app"
+  cloud:
+    vault:
+      enabled: true
+      token: 00000000-0000-0000-0000-000000000000
+      scheme: http

@@ -1,0 +1,24 @@
+app:
+  credit-card-validation:
+    test-card-numbers:
+      # used for simulating registerToken failures in karate tests
+      - 4100282040123000
+      - InvalidStripeCreditCard
+  gateway:
+    stripe:
+      api-key: "sk_test_51LGPbLI0iFqL5wBv4TG3Szk5tH8O5pJW5CoFG6kZd28mTjypF62yu7oSKtYbq94XWP2jMYgiWOzYocIA3P5zJjpW00yezd1x34"
+      webhooks:
+        signing-secret: "whsec_ffbMLT69uKMmoAo2yG50Ac1gZQ6NUphN"
+    worldpay:
+      url: "https://www.testvantivcnp.com/sandbox/communicator/online"
+      username: "user"
+      password: "pass"
+      merchant-id: "mid"
+      report-group: "reportGroup"
+      register-token-success-codes:
+        - "801"
+        - "802"
+        - "803"
+        - "805"
+      transaction-success-codes:
+        - "000"
