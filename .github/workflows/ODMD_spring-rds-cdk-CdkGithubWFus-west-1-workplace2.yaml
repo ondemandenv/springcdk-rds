@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
-      - uses: ondemandenv/build@main
+      - uses: ondemandenv/build@main-gh-read-token
         with:
           aws_credentials: ${{github.event.inputs.aws_credentials}}
         env:
