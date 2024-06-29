@@ -1,9 +1,11 @@
 #ODMD GENERATED WORKFLOW, don't change unless you are sure
 
-name: ODMD_spring-rds-img-ContainerImageEcrus-west-1-workplace1
+name: ODMD_spring-rds-cdk-CdkGithubWFus-west-1-workplace1
 on:
   workflow_dispatch:
     inputs:
+      target_rev_ref:
+        description: 'Tag or revision/SHA to checkout'
       aws_credentials:
         type: string
         description: | 
@@ -19,16 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.event.inputs.ref || github.ref }}
       - uses: ondemandenv/build@main
         with:
           aws_credentials: ${{github.event.inputs.aws_credentials}}
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          ODMD_buildId: spring-rds-img
-          ODMD_workDirs: .
-          ODMD_buildType: ContainerImageEcr
+          ODMD_buildId: spring-rds-cdk
+          ODMD_workDirs: cdk
+          ODMD_buildType: CdkGithubWF
           ODMD_awsRegion: us-west-1
-          ODMD_AWS_CREDENTIALS: ${{ secrets['ODMD_AWS_CREDENTIALS_ODMD_spring_rds_img_ContainerImageEcrus_west_1_workplace1'] }}
+          ODMD_AWS_CREDENTIALS: ${{ secrets['ODMD_AWS_CREDENTIALS_ODMD_spring_rds_cdk_CdkGithubWFus_west_1_workplace1'] }}
 
 #
