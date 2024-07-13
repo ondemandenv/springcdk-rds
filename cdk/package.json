@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "repository": "https://github.com/gyanglz/springrds-cdk.git",
   "dependencies": {
-    "@ondemandenv/odmd-contracts": "0.1.88-n",
+    "@ondemandenv/odmd-contracts": "0.1.88-d6",
     "aws-cdk-lib": "2.142.1",
     "cdk8s": "2.68.24",
     "cdk8s-plus-27": "2.7.70",
