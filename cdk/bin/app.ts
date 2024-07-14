@@ -16,7 +16,7 @@ export class CurrentEnver {
         }
 
         CurrentEnver._odmdEnVerConfig = OndemandContracts.inst.springRdsCdk.envers.find(e => {
-            return OndemandContracts.REV_REF_value == e.targetRevision.toString()
+            return OndemandContracts.REV_REF_value == e.targetRevision.toPathPartStr()
         })! as OdmdEnverSampleSpringCdkEcs
 
         if (!CurrentEnver._odmdEnVerConfig) {
@@ -26,7 +26,7 @@ export class CurrentEnver {
         if (CurrentEnver._appEnverConfig) {
             throw new Error("can't init twice")
         }
-        const {EnverConfigImpl} = await import( (`./app-envers/${OndemandContracts.REV_REF_value.substring(2)}`) )
+        const {EnverConfigImpl} = await import( (`./app-envers/${OndemandContracts.REV_REF_value.substring(3)}`) )
         CurrentEnver._appEnverConfig = new EnverConfigImpl() as AppEnverConfig
     }
 

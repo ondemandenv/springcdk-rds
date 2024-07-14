@@ -23,6 +23,7 @@ export class SpringEcsRds extends Stack {
 
 
         const enver = CurrentEnver.odmdEnVerConfig;
+        const localConfig = CurrentEnver.appEnverConfig;
         const vpc = Vpc.fromLookup(this, 'vpc', {
             vpcName: enver.vpcConfig.vpcName
         })
@@ -35,14 +36,13 @@ export class SpringEcsRds extends Stack {
 
         const rdsConfig = enver.rdsConfig!;
 
-
         const pgUsers = new PgSchemaUsers(this, new PgSchemaUsersProps(enver,
             enver.pgSchemaUsersProps.schema, [
                 {
-                    userName: CurrentEnver.appEnverConfig.appUsr.userName,
+                    userName: localConfig.appUsr.userName,
                     roleType: 'app'
                 }, {
-                    userName: CurrentEnver.appEnverConfig.migUsr.userName,
+                    userName: localConfig.migUsr.userName,
                     roleType: 'migrate'
                 }
             ]
@@ -69,13 +69,13 @@ export class SpringEcsRds extends Stack {
             }),
             environment: {
                 RDS_ENDPOINT: rdsSocketAddress + '/' + rdsConfig.defaultDatabaseName,
-                RDS_SECRET: pgUsers.usernameToSecretId.get(CurrentEnver.appEnverConfig.migUsr.userName)!,
+                RDS_SECRET: pgUsers.usernameToSecretId.get(localConfig.migUsr.userName)!,
                 APP_SCHEMA: enver.pgSchemaUsersProps.schema,
                 read_only: enver.rdsUsrReadOnly.getSharedValue(this)
             }
         });
 
-        Secret.fromSecretNameV2(this, 'mig-seret', pgUsers.usernameToSecretId.get(CurrentEnver.appEnverConfig.migUsr.userName)!).grantRead(migTaskDef.taskRole)
+        Secret.fromSecretNameV2(this, 'mig-seret', pgUsers.usernameToSecretId.get(localConfig.migUsr.userName)!).grantRead(migTaskDef.taskRole)
 
         const rdsSg = SecurityGroup.fromLookupByName(this, 'rds-sg', enver.rdsConfig.defaultSgName, vpc)
 
@@ -96,7 +96,7 @@ export class SpringEcsRds extends Stack {
             cpu: 1024, memoryLimitMiB: 2048,
             environment: {
                 RDS_ENDPOINT: rdsSocketAddress + '/' + rdsConfig.defaultDatabaseName,
-                RDS_SECRET: pgUsers.usernameToSecretId.get(CurrentEnver.appEnverConfig.appUsr.userName)!,
+                RDS_SECRET: pgUsers.usernameToSecretId.get(localConfig.appUsr.userName)!,
                 APP_SCHEMA: enver.pgSchemaUsersProps.schema,
                 OTEL_TRACE_AGENT_URL: 'http://localhost:9411/v1/trace',
                 OTEL_SERVICE_NAME: 'rds_spring_ecs',
@@ -105,7 +105,7 @@ export class SpringEcsRds extends Stack {
             }
         }).addPortMappings({hostPort: springListenerPort, containerPort: springListenerPort});
 
-        Secret.fromSecretNameV2(this, 'app-seret', pgUsers.usernameToSecretId.get(CurrentEnver.appEnverConfig.appUsr.userName)!).grantRead(appTaskDef.taskRole)
+        Secret.fromSecretNameV2(this, 'app-seret', pgUsers.usernameToSecretId.get(localConfig.appUsr.userName)!).grantRead(appTaskDef.taskRole)
 
         const applicationLoadBalancer = new ApplicationLoadBalancer(this, 'ecs-fargate-service-alb', {vpc});
         applicationLoadBalancer.logAccessLogs(new Bucket(this, 'ecs-fargate-service-alb-log', {
