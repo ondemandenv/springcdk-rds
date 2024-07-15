@@ -67,8 +67,8 @@ export class EcrECS<T extends ContractsEnverCdk> extends Construct {
 
         const taskdefImgFileName = "imagedefinitions.json";
 
-        const appImgDef = Base64.encode(fs.readFileSync(__dirname + "/ecrs-utils/genAppContainerImgDef.ts", 'utf-8'));
-        const runMigTsk = Base64.encode(fs.readFileSync(__dirname + "/ecrs-utils/deployMigrateTask.ts", 'utf-8'));
+        const appImgDef = Base64.encode(fs.readFileSync(__dirname + "/ecrs-utils/genAppContainerImgDef.js", 'utf-8'));
+        const runMigTsk = Base64.encode(fs.readFileSync(__dirname + "/ecrs-utils/deployMigrateTask.js", 'utf-8'));
 
         const buildDefLog = new LogGroup(stack, appConfig.owner.buildId + '_buildDefLog', {
             removalPolicy: appConfig.ephemeral ? RemovalPolicy.DESTROY : RemovalPolicy.SNAPSHOT

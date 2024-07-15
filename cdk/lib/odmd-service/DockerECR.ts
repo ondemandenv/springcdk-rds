@@ -182,7 +182,7 @@ export class DockerECR<T extends ContractsEnverCdk> extends Construct {
             new GitHubSourceAction({
                 actionName: 'img_src',
                 owner: enver.owner.gitHubRepo.owner,
-                repo: enver.owner.gitHubRepo.name,
+                repo: enver.owner.gitHubRepo.repo,
                 branch: OndemandContracts.REV_REF_value.substring(2),
                 trigger: GitHubTrigger.POLL,
                 oauthToken: SecretValue.secretsManager(secret.secretArn),
@@ -191,7 +191,7 @@ export class DockerECR<T extends ContractsEnverCdk> extends Construct {
 
 
         this.buildImgPipeline = new Pipeline(owner, enver.node.id + '_build_img_pipeline', {
-            pipelineName: enver.owner.buildId + OndemandContracts.REV_REF_value.substring(3) + '_build_imgs',
+            pipelineName: enver.owner.buildId + OndemandContracts.REV_REF_value.substring(2) + '_build_imgs',
             role: buildRole,
             stages: [
                 {
