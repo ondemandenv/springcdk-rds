@@ -28,7 +28,7 @@ jobs:
         with:
           aws_credentials: ${{github.event.inputs.aws_credentials}}
           trigger_message: ${{github.event.inputs.message}}
-          envar_stackName: odmd-ctl-BUILD-spring-rds-cdk-590184130740-PP
+          envar_stackName: undefined
         env:
           ODMD_buildId: spring-rds-cdk
           ODMD_awsRegion: us-west-1
